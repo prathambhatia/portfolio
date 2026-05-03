@@ -71,7 +71,7 @@ const Navbar = () => {
                         </Tooltip>
                     </Link>
 
-                    <Link href="https://www.linkedin.com/in/prathambhatia" target='_blank'>
+                    <Link href="https://www.linkedin.com/in/bhatiapratham18/" target='_blank'>
                         <Tooltip content="Linkedin">
                             <div className='hover:px-3 max-sm:hover:px-2 py-2.5 dark:hover:bg-[#262626] hover:bg-[#F4F4F5] rounded-full transition-all duration-300'>
                                 <LinkedInLogoIcon className='w-[19px] h-[19px] max-sm:w-[15px] max-sm:h-[15px] text-black dark:text-white' />
