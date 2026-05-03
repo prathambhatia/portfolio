@@ -4,6 +4,7 @@ import BlogPage from './components/BlogPage'
 import BlogHeader from './components/BlogHeader'
 import { calculateReadingTime } from '@/utils/blogReadingTime'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -30,6 +31,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogDetailPage({ params }: PageProps) {
     const blog = await getBlog(params.blogid)
+
+    if (blog.image_public_id.startsWith('http')) {
+        redirect(blog.image_public_id)
+    }
+
     const readingTime = calculateReadingTime(blog.content)
 
     return (
