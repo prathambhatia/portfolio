@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useEffect, useRef, useState, ReactNode } from "react";
 
 interface DarkModeContextType {
     isDarkMode: boolean;
@@ -15,6 +15,7 @@ interface DarkModeProviderProps {
 
 const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState<boolean | null>(false);
+    const themeSoundRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
         const storedPreference = localStorage.getItem("theme");
@@ -27,11 +28,28 @@ const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) => {
         } else {
             document.documentElement.classList.remove("dark");
         }
-        
+
         document.documentElement.style.overflowY = 'auto';
+
+        const audio = new Audio("/theme-click.mp3");
+        audio.preload = "auto";
+        themeSoundRef.current = audio;
+
+        return () => {
+            if (themeSoundRef.current) {
+                themeSoundRef.current.pause();
+                themeSoundRef.current.src = "";
+                themeSoundRef.current = null;
+            }
+        };
     }, []);
 
     const toggleDarkMode = () => {
+        const audio = themeSoundRef.current;
+        if (audio) {
+            audio.currentTime = 0;
+            void audio.play().catch(() => {});
+        }
         setIsDarkMode((prev) => {
             const newValue = !prev;
             localStorage.setItem("theme", newValue ? "dark" : "light");
