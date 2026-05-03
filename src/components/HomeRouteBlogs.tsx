@@ -38,6 +38,7 @@ function HomeRouteBlogs() {
                     title={blog.title}
                     id={blog.id}
                     createdAt={blog.createdAt}
+                    image_public_id={blog.image_public_id}
                 />
             ))}
         </section>

@@ -30,6 +30,7 @@ async function BlogList() {
                     createdAt={blog.createdAt}
                     content={blog.content}
                     id={blog.id}
+                    image_public_id={blog.image_public_id}
                 />
             ))}
         </div>

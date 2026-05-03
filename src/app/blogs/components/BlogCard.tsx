@@ -15,11 +15,13 @@ type Blog = {
     createdAt: string
 }
 
-const BlogCard = ({ title, createdAt, content, id }: Blog) => {
+const BlogCard = ({ title, createdAt, content, id, image_public_id }: Blog) => {
     const readingTime = calculateReadingTime(content as string);
+    const isExternal = image_public_id?.startsWith('http');
+    const href = isExternal ? image_public_id! : `/blogs/${id}`;
 
     return (
-        <Link href={`/blogs/${id}`} underline='none'>
+        <Link href={href} underline='none' target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>
             <div className={`flex gap-5 py-1 px-5 rounded-lg w-[50vw] overflow-hidden max-sm:w-full ${bricolage_grotesque}`}>
                 <div className="py-3 space-y-2 w-full">
                     <h2 className='text-[26px] max-sm:text-base font-extrabold dark:text-white text-black break-words'>{title}</h2>
