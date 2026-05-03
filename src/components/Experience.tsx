@@ -19,7 +19,7 @@ const Experience = () => {
                 experienceData.map((exp: I_Experience, idx) => (
                     <MagicCard key={idx} className="cursor-pointer h-fit dark:shadow-2xl !bg-transparent border-none" gradientColor={`${isDarkMode ? '#262626' : 'rgba(197, 241, 241, 0.4)'}`}>
                         <div className={`${exp.job_title === "Freelance" ? 'max-sm:ml-1 max-lg:ml-1' : ''} flex w-full px-5 max-sm:px-0 max-sm:pr-1 py-3`}>
-                            <div className={`w-24 flex items-center justify-center max-sm:justify-start ${exp.company_logo === '/freelance-icon.webp' ? 'max-sm:!w-[79px]' : ''} ${exp.company_logo === '/stealth-startup.jpeg' ? 'max-sm:!w-[92px]' : ''}`}>
+                            <div className={`w-24 flex items-center justify-center max-sm:justify-start ${exp.company_logo === '/freelance-icon.webp' ? 'max-sm:!w-[79px]' : ''}`}>
                                 <Link href={exp.company_link} target='_blank'>
                                     <Image src={exp.company_logo} alt='company-logo' width={50} height={50} className={`rounded-full`} />
                                 </Link>
