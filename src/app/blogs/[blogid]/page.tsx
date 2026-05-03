@@ -4,7 +4,8 @@ import BlogPage from './components/BlogPage'
 import BlogHeader from './components/BlogHeader'
 import { calculateReadingTime } from '@/utils/blogReadingTime'
 import { Metadata } from 'next'
-import { prisma } from '@/lib/prisma'
+
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
     params: {
@@ -56,13 +57,3 @@ export default async function BlogDetailPage({ params }: PageProps) {
     )
 }
 
-export async function generateStaticParams() {
-    const blogs = await prisma.blog.findMany({
-        select: { id: true },
-        take: 20
-    })
-
-    return blogs.map((blog) => ({
-        blogid: blog.id
-    }))
-}
